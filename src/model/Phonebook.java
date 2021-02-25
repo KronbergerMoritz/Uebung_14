@@ -1,5 +1,8 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class Phonebook
@@ -8,8 +11,11 @@ public class Phonebook
     {
         addNewPerson("Marcel Prilinger", "Eberstalzell", "0664 69686421");
         addNewPerson("Moritz Kronberger", "Eberstalzell", "0677 62454541");
-        addNewPerson("Matteo Falkenber", "Wels", "0664 525174670");
+        addNewPerson("Matteo Falkenberg", "Wels", "0664 525174670");
     }
+
+    private ArrayList<Person> person = new ArrayList<>();
+
 
     public void addNewPerson(String name, String address, String phone)
     {
@@ -20,8 +26,6 @@ public class Phonebook
 
     person.add(person2);
     }
-
-    private ArrayList<Person> person = new ArrayList<>();
 
 
 
@@ -62,24 +66,24 @@ public class Phonebook
 
 
 
-
-
-    public void backPage()
-    {
-
-    }
-
     public void saveCSV()
     {
-
+        try
+        {
+            int i = Integer.valueOf
+            FileWriter fw = new FileWriter("./save/savedFile.txt");
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(person.get(i));
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
     }
 
     public void loadCSV()
     {
-
+        person.clear();
     }
-
-
-
 
 }

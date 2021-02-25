@@ -31,8 +31,16 @@ public class Person
         this.phone = phone;
     }
 
-   /** @Override
-    public String toString() {
-        return null;
-    }**/
+    @Override
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.append(name);
+        sb.append(address);
+        sb.append(phone);
+
+        String s = sb.toString();
+        return s;
+
+    }
 }
