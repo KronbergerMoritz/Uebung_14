@@ -10,8 +10,6 @@ import model.Phonebook;
 
 public class Controller extends Phonebook{
 
-        private Phonebook phonebook = new Phonebook();
-        private int position = 1;
 
         @FXML
         private Label l_page;
@@ -28,11 +26,19 @@ public class Controller extends Phonebook{
         @FXML
         private Label l_error;
 
+        private Phonebook phonebook = new Phonebook();
+        private int page = 1;
+
+        public Controller() {
+        }
+
+
+
+
         private void update()
         {
-                l_page.setText(position + "/" + phonebook.size());
-                Person person = phonebook.getPerson(position);
-
+                l_page.setText(page + "/" + phonebook.size());
+                Person person = phonebook.getPerson(page);
                 tf_name.setText(person.getName());
                 tf_address.setText(person.getAddress());
                 tf_phone.setText(person.getPhone());
@@ -43,7 +49,6 @@ public class Controller extends Phonebook{
         public void initialize()
         {
                 update();
-
         }
 
 
@@ -52,7 +57,7 @@ public class Controller extends Phonebook{
         {
                 l_error.setText("");
                 phonebook.empty();
-                position = phonebook.size();
+                page = phonebook.size();
                 update();
         }
 
@@ -60,9 +65,9 @@ public class Controller extends Phonebook{
         void back(MouseEvent event)
         {
                 l_error.setText("");
-                if(position > 1)
+                if(page > 1)
                 {
-                        position--;
+                        page--;
                         update();
                 }
                 else
@@ -80,10 +85,10 @@ public class Controller extends Phonebook{
                 if(phonebook.size() > 1)
                 {
 
-                        phonebook.deletePerson(position);
-                        if(position > phonebook.size())
+                        phonebook.deletePerson(page);
+                        if(page > phonebook.size())
                         {
-                           position = phonebook.size();
+                           page = phonebook.size();
                         }
                         update();
 
@@ -105,6 +110,7 @@ public class Controller extends Phonebook{
         @FXML
         void loadcsv(MouseEvent event) {
                 l_error.setText("");
+                phonebook.loadCSV();
 
         }
 
@@ -112,9 +118,9 @@ public class Controller extends Phonebook{
         void next(MouseEvent event)
         {
                 l_error.setText("");
-                if(position < phonebook.size())
+                if(page < phonebook.size())
                 {
-                        position++;
+                        page++;
                         update();
                 }
                 else
@@ -132,12 +138,13 @@ public class Controller extends Phonebook{
                 String name = tf_name.getText();
                 String address = tf_address.getText();
                 String phone = tf_phone.getText();
-                phonebook.savePerson(position, name, address, phone);
+                phonebook.savePerson(page, name, address, phone);
         }
 
         @FXML
         void savecsv(MouseEvent event) {
                 l_error.setText("");
+                phonebook.saveCSV();
 
         }
 

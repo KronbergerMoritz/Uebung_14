@@ -7,6 +7,8 @@ public class Person
     private String address;
     private String phone;
 
+
+
     public String getName() {
         return name;
     }
@@ -36,11 +38,14 @@ public class Person
     {
         StringBuilder sb = new StringBuilder();
         sb.append(name);
+        sb.append(";");
         sb.append(address);
+        sb.append(";");
         sb.append(phone);
 
         String s = sb.toString();
         return s;
+
 
     }
 }
