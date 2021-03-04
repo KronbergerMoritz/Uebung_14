@@ -40,14 +40,14 @@
                <children>
                   <Button fx:id="btn_add" mnemonicParsing="false" onMouseClicked="#add" prefHeight="86.0" prefWidth="100.0" text="Add" />
                   <Button fx:id="btn_delete" mnemonicParsing="false" onMouseClicked="#delete" prefHeight="70.0" prefWidth="100.0" text="Delete" />
-                  <Button fx:id="btn_save" mnemonicParsing="false" onMouseClicked="#save" prefHeight="70.0" prefWidth="100.0" text="Save Changes" />
+                  <Button fx:id="btn_save" mnemonicParsing="false" prefHeight="70.0" prefWidth="100.0" text="Save Changes" />
                </children>
             </HBox>
             <HBox prefHeight="90.0" prefWidth="390.0">
                <children>
-                  <Button fx:id="btn_loadcsv" mnemonicParsing="false" onMouseClicked="#loadcsv" prefHeight="70.0" prefWidth="100.0" text="Load from CSV" />
+                  <Button fx:id="btn_loadcsv" mnemonicParsing="false"  prefHeight="70.0" prefWidth="100.0" text="Load from CSV" />
                   <Label prefWidth="100.0" />
-                  <Button fx:id="btn_savecsv" mnemonicParsing="false" onMouseClicked="#savecsv" prefHeight="70.0" prefWidth="100.0" text="Save to CSV" />
+                  <Button fx:id="btn_savecsv" mnemonicParsing="false" prefHeight="70.0" prefWidth="100.0" text="Save to CSV" />
                </children>
             </HBox>
             <VBox prefHeight="90.0" prefWidth="390.0">

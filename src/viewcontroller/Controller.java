@@ -7,6 +7,8 @@ import javafx.scene.input.MouseEvent;
 import model.Person;
 import model.Phonebook;
 
+import java.util.ArrayList;
+
 
 public class Controller extends Phonebook{
 
@@ -56,10 +58,20 @@ public class Controller extends Phonebook{
         void add(MouseEvent event)
         {
                 l_error.setText("");
-                phonebook.empty();
-                page = phonebook.size();
-                update();
-        }
+                String address = String.valueOf(tf_address);
+                String name = String.valueOf(tf_name);
+                String phone = String.valueOf(tf_phone);
+
+
+                        l_error.setText("Ungültige Eingabe");
+                        l_error.setStyle("-fx-text-fill: red;");
+                        System.out.println("Ungültige Eingabe");
+
+                        phonebook.empty();
+                        page = phonebook.size();
+                        update();
+                }
+
 
         @FXML
         void back(MouseEvent event)
@@ -69,12 +81,14 @@ public class Controller extends Phonebook{
                 {
                         page--;
                         update();
+                        phonebook.saveCSV();
                 }
                 else
                 {
                         l_error.setText("Keine Seite mehr Vorhanden!");
                         l_error.setStyle("-fx-text-fill: red;");
                         System.out.println("Keine Seite mehr Vorhanden!");
+                        phonebook.saveCSV();
                 }
         }
 
@@ -107,12 +121,13 @@ public class Controller extends Phonebook{
 
         }
 
-        @FXML
+  /**      @FXML
         void loadcsv(MouseEvent event) {
                 l_error.setText("");
                 phonebook.loadCSV();
 
         }
+   **/
 
         @FXML
         void next(MouseEvent event)
@@ -122,12 +137,14 @@ public class Controller extends Phonebook{
                 {
                         page++;
                         update();
+                        phonebook.saveCSV();
                 }
                 else
                 {
                         l_error.setText("Keine Seite mehr Vorhanden!");
                         l_error.setStyle("-fx-text-fill: red;");
                         System.out.println("Keine Seite mehr Vorhanden!");
+                        phonebook.saveCSV();
                 }
         }
 
@@ -141,12 +158,12 @@ public class Controller extends Phonebook{
                 phonebook.savePerson(page, name, address, phone);
         }
 
-        @FXML
+   /**     @FXML
         void savecsv(MouseEvent event) {
                 l_error.setText("");
                 phonebook.saveCSV();
 
-        }
+        }**/
 
     }
 

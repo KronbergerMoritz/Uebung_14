@@ -5,9 +5,10 @@ import java.util.ArrayList;
 
 public class Phonebook {
     public Phonebook() {
-        addNewPerson("Marcel Prilinger", "Eberstalzell", "0664 69686421");
-        addNewPerson("Moritz Kronberger", "Eberstalzell", "0677 62454541");
-        addNewPerson("Matteo Falkenberg", "Wels", "0664 525174670");
+        //addNewPerson("Marcel Prilinger", "Eberstalzell", "0664 69686421");
+        //addNewPerson("Moritz Kronberger", "Eberstalzell", "0677 62454541");
+        //addNewPerson("Matteo Falkenberg", "Wels", "0664 525174670");
+        loadCSV();
     }
 
     private ArrayList<Person> person = new ArrayList<>();
@@ -20,6 +21,8 @@ public class Phonebook {
         person2.setName(name);
 
         person.add(person2);
+
+
     }
 
 
@@ -31,6 +34,8 @@ public class Phonebook {
 
         person.add(person1);
 
+        saveCSV();
+        savePerson(0, "", "", "");
     }
 
     public int size() {
@@ -42,15 +47,21 @@ public class Phonebook {
         person.get(index - 1).setName(name);
         person.get(index - 1).setAddress(address);
         person.get(index - 1).setPhone(phone);
+
+        saveCSV();
     }
 
 
-    public Person getPerson(int index) {
+    public Person getPerson(int index)
+    {
         return person.get(index - 1);
     }
 
-    public void deletePerson(int index) {
+    public void deletePerson(int index)
+    {
         person.remove(index - 1);
+        saveCSV();
+        savePerson(index, "", "", "");
     }
 
 
