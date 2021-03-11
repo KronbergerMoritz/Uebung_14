@@ -64,6 +64,13 @@ public class Controller extends Phonebook{
                                         return false;
 
                                 }
+                                else if(!phone.contains("/"))
+                                {
+                                        l_error.setText("Bitte ein / Eingeben");
+                                        l_error.setStyle("-fx-text-fill: red;");
+                                        System.out.println("Bitte ein / Eingeben");
+                                        return false;
+                                }
                         }
                 }
               return true;
@@ -161,7 +168,7 @@ public class Controller extends Phonebook{
                         l_error.setText("Alles bereits gelöscht");
                         l_error.setStyle("-fx-text-fill: red;");
                         System.out.println("Alles Gelöscht!");
-
+                        save();
                         phonebook.saveCSV();
                 }
 
