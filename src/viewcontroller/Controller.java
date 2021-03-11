@@ -7,8 +7,6 @@ import javafx.scene.input.MouseEvent;
 import model.Person;
 import model.Phonebook;
 
-import java.util.ArrayList;
-
 
 public class Controller extends Phonebook{
 
@@ -32,9 +30,44 @@ public class Controller extends Phonebook{
         private int page = 1;
 
         public Controller() {
+
         }
 
 
+        private boolean controll()
+        {
+                l_error.setText("");
+                String address = tf_address.getText();
+                String name = tf_name.getText();
+                String phone = tf_phone.getText();
+
+
+                String[] number = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
+                String[] letter = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k","l", "m", "n", "o", "p", "q", "r","s", "t", "u", "v", "w", "x", "y","z","ä", "ö", "ü"};
+
+                for(int i = 0; i<number.length; i++) {
+                        for(int j = 0; j<letter.length; j++) {
+
+
+                                if (name.contains(number[i]) || address.contains(number[i]) || phone.contains(letter[j])) {
+                                        l_error.setText("Ungültige Eingabe!");
+                                        l_error.setStyle("-fx-text-fill: red;");
+                                        System.out.println("Ungültige Eingabe");
+                                        return false;
+
+
+
+                                } else if (name.equals("") || address.equals("") || phone.equals("")) {
+                                        l_error.setText("Werte Fehlen!");
+                                        l_error.setStyle("-fx-text-fill: red;");
+                                        System.out.println("Werte Eingaben");
+                                        return false;
+
+                                }
+                        }
+                }
+              return true;
+        }
 
 
         private void update()
@@ -57,38 +90,47 @@ public class Controller extends Phonebook{
         @FXML
         void add(MouseEvent event)
         {
+
                 l_error.setText("");
-                String address = String.valueOf(tf_address);
-                String name = String.valueOf(tf_name);
-                String phone = String.valueOf(tf_phone);
-
-
-                        l_error.setText("Ungültige Eingabe");
-                        l_error.setStyle("-fx-text-fill: red;");
-                        System.out.println("Ungültige Eingabe");
-
-                        phonebook.empty();
-                        page = phonebook.size();
-                        update();
+              if(controll()==false)
+              {
+                      controll();
+              }
+              else {
+                      save();
+                      l_error.setText("Neuer Eintrag! Werte Eingeben");
+                      l_error.setStyle("-fx-text-fill: green;");
+                      phonebook.empty();
+                      page = phonebook.size();
+                      update();
+                         }
                 }
 
 
         @FXML
         void back(MouseEvent event)
         {
+
                 l_error.setText("");
-                if(page > 1)
+                if(controll() == false)
                 {
-                        page--;
-                        update();
-                        phonebook.saveCSV();
+                        controll();
                 }
-                else
-                {
-                        l_error.setText("Keine Seite mehr Vorhanden!");
-                        l_error.setStyle("-fx-text-fill: red;");
-                        System.out.println("Keine Seite mehr Vorhanden!");
-                        phonebook.saveCSV();
+                else {
+                        save();
+                        if (page > 1) {
+
+                                page--;
+                                update();
+                                phonebook.saveCSV();
+
+
+                        } else {
+                                l_error.setText("Keine Seite mehr Vorhanden!");
+                                l_error.setStyle("-fx-text-fill: red;");
+                                System.out.println("Keine Seite mehr Vorhanden!");
+                                phonebook.saveCSV();
+                        }
                 }
         }
 
@@ -98,14 +140,17 @@ public class Controller extends Phonebook{
                 l_error.setText("");
                 if(phonebook.size() > 1)
                 {
-
                         phonebook.deletePerson(page);
-                        if(page > phonebook.size())
-                        {
-                           page = phonebook.size();
-                        }
-                        update();
+                                 if (page > phonebook.size())
+                                 {
 
+                                         page = phonebook.size();
+
+                                 }
+
+                        l_error.setText("Eintrag gelöscht");
+                        l_error.setStyle("-fx-text-fill: green;");
+                        update();
 
                 }
                 else
@@ -116,40 +161,41 @@ public class Controller extends Phonebook{
                         l_error.setText("Alles bereits gelöscht");
                         l_error.setStyle("-fx-text-fill: red;");
                         System.out.println("Alles Gelöscht!");
+
+                        phonebook.saveCSV();
                 }
 
 
         }
-
-  /**      @FXML
-        void loadcsv(MouseEvent event) {
-                l_error.setText("");
-                phonebook.loadCSV();
-
-        }
-   **/
 
         @FXML
         void next(MouseEvent event)
         {
                 l_error.setText("");
-                if(page < phonebook.size())
+
+                if(controll() == false)
                 {
-                        page++;
-                        update();
-                        phonebook.saveCSV();
+                        controll();
                 }
-                else
-                {
-                        l_error.setText("Keine Seite mehr Vorhanden!");
-                        l_error.setStyle("-fx-text-fill: red;");
-                        System.out.println("Keine Seite mehr Vorhanden!");
-                        phonebook.saveCSV();
+                else {
+                        save();
+                        if (page < phonebook.size()) {
+                                page++;
+                                update();
+                                phonebook.saveCSV();
+
+
+                        } else {
+                                l_error.setText("Keine Seite mehr Vorhanden!");
+                                l_error.setStyle("-fx-text-fill: red;");
+                                System.out.println("Keine Seite mehr Vorhanden!");
+                                phonebook.saveCSV();
+                        }
                 }
         }
 
-        @FXML
-        void save(MouseEvent event)
+
+       private void save()
         {
                 l_error.setText("");
                 String name = tf_name.getText();
@@ -158,12 +204,4 @@ public class Controller extends Phonebook{
                 phonebook.savePerson(page, name, address, phone);
         }
 
-   /**     @FXML
-        void savecsv(MouseEvent event) {
-                l_error.setText("");
-                phonebook.saveCSV();
-
-        }**/
-
     }
-

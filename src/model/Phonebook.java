@@ -5,9 +5,8 @@ import java.util.ArrayList;
 
 public class Phonebook {
     public Phonebook() {
-        //addNewPerson("Marcel Prilinger", "Eberstalzell", "0664 69686421");
-        //addNewPerson("Moritz Kronberger", "Eberstalzell", "0677 62454541");
-        //addNewPerson("Matteo Falkenberg", "Wels", "0664 525174670");
+       // addNewPerson("a", "f", "e");
+        //addNewPerson("f", "fg", "vfd");
         loadCSV();
     }
 
@@ -34,8 +33,6 @@ public class Phonebook {
 
         person.add(person1);
 
-        saveCSV();
-        savePerson(0, "", "", "");
     }
 
     public int size() {
@@ -51,17 +48,16 @@ public class Phonebook {
         saveCSV();
     }
 
-
     public Person getPerson(int index)
     {
         return person.get(index - 1);
     }
 
+
     public void deletePerson(int index)
     {
         person.remove(index - 1);
-        saveCSV();
-        savePerson(index, "", "", "");
+
     }
 
 
